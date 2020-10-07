@@ -1,0 +1,58 @@
+# 메인화면
+
+	요청내용	:	/no4/main.no4
+	파라미터	:	
+	컨트롤러	:	com.class02.no4.controller.Main
+	처리함수	:	
+	   뷰		:	/WEB-INF/views/main.jsp
+---------------------------------------------------------------------------------
+# 로그인 뷰
+
+	요청내용	:	/no4/signin.no4
+	파라미터	:	
+	컨트롤러	:	com.class02.no4.controller.member
+	처리함수	:	signin
+	   뷰		:	/WEB-INF/views/signin.jsp
+---------------------------------------------------------------------------------
+# 로그인 처리요청
+
+	요청내용	:	/no4/signinProc.no4
+	파라미터	:	id, pw
+	컨트롤러	:	com.class02.no4.controller.member
+	처리함수	:	signinProc, signinProcRedirect
+	   뷰		:	Redirect - /no4/main.no4 - 성공
+	   				Redirect - /no4/signin.no4 - 실패
+---------------------------------------------------------------------------------
+# 로그아웃 처리요청
+
+	요청내용	:	/no4/logout.no4
+	파라미터	:	SID
+	컨트롤러	:	com.class02.no4.controller.member
+	처리함수	:	logout
+	   뷰		:	Redirect - /no4/signin.no4 - 성공
+	   				Redirect - /no4/main.no4   - 실패
+---------------------------------------------------------------------------------
+#  회원가입 뷰
+
+	요청내용	:	/no4/signup.no4
+	파라미터	:	
+	컨트롤러	:	com.class02.no4.controller.member.signup
+	처리함수	:	signup
+	   뷰		:	/WEB-INF/views/signup.jsp
+---------------------------------------------------------------------------------
+#  회원가입 처리요청
+
+	요청내용	:	/no4/signupProc.no4
+	파라미터	:	
+	컨트롤러	:	com.class02.no4.controller.member.signup
+	처리함수	:	signupProc
+	   뷰		:	
+---------------------------------------------------------------------------------
+#  보드게시판 띄우기
+
+	요청내용	:	/no4/boardList.no4
+	파라미터	:	
+	컨트롤러	:	com.class02.no4.controller.board.BoardList
+	처리함수	:	boardList
+	   뷰		:	/WEB-INF/views/boardList.jsp
+---------------------------------------------------------------------------------

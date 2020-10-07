@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+ 			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bSQL">
+	
+	<!-- 게시판 리스트 뽑아오기 -->
+	 <select id="getList" resultType="bVO" >
+		SELECT
+			ROWNUM rno, bno, mno, id, name, title, body, bdate, bdate btime, click
+		FROM
+			(SELECT
+		        bno, bmno mno, id, name, title, body, board.bdate bdate, click
+		    FROM
+		        board, member
+		    WHERE
+		        bmno = mno
+		        AND board.isshow = 'Y'
+		    ORDER BY
+		        bno desc)
+	</select>
+	<!-- 게시판 카운트 -->
+	<select id="selCnt" resultType="int">
+	 			SELECT
+	 				COUNT(*) totalCount
+	 			FROM
+	 				board
+	 			WHERE
+	 				isshow = 'Y'
+	</select>
+	<!-- 게시글 추가  -->
+	<insert id="addList" parameterType="bVO">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(bno) +1, 1001)
+			FROM
+				board
+		</selectKey>
+		INSERT INTO
+			board(bno, title, body, bmno)
+		VALUES(
+			#{bno}, #{title}, #{body},
+			(
+				SELECT
+					mno
+				FROM
+					member
+				WHERE
+					id = #{id}
+			)
+		)
+	</insert>
+	<!-- 게시글 상세보기 -->
+	<select id="getDetail" resultType="bVO" parameterType="bVO">
+		SELECT
+ 				bno, title, body, bmno mno, id, bino, oriname, savename, click, board.bdate bdate, board.bdate btime
+ 			FROM
+ 				board, brdimage, member
+ 			WHERE
+ 				bno = #{bno}
+ 				AND bno = bi_bno(+)
+ 				AND bmno = mno
+	</select>
+	<!-- 게시글 수정 -->
+	<update id="boardEdit" parameterType="bVO">
+		UPDATE
+			board
+		SET
+			body = #{body}, title = #{title}
+		WHERE
+			bno = #{bno}
+	</update>
+	<!-- 게시글 삭제 -->
+	<delete id="boardDelete" parameterType="bVO">
+		DELETE
+		FROM board
+		WHERE
+			bno = #{bno}
+	</delete>
+</mapper>

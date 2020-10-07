@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="mSQL">
+		<sql id="selCNT">
+			SELECT
+				count(*) cnt
+			FROM
+				member
+			WHERE
+				id = 
+		</sql>
+		<!-- 로그인 처리 -->
+	<select id="login" resultType="int" parameterType="mVO">
+	
+		SELECT
+			count(*) cnt
+		FROM
+			member
+		WHERE
+			id = #{id}
+			AND PW = #{pw}
+	</select>
+	<!-- 회원가입 처리 -->
+	<insert id="addMember" parameterType="mVO">
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(mno)+1, 1000)
+			FROM
+				member
+		</selectKey>
+		INSERT INTO
+			member(mno, name, id, pw, mail, gen, tel, ano)
+		VALUES(
+			#{mno}, #{name}, #{id}, #{pw}, #{mail}, #{gen}, #{tel}, #{ano}
+		)
+	</insert>
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType="int" parameterType="mVO">
+		SELECT
+			count(*)
+		FROM
+			member
+		WHERE
+			id = #{id}
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="pwfind" resultType="int" parameterType="mVO">
+		SELECT
+			count(*)
+		FROM
+			member
+		WHERE
+			id = #{id}
+			AND mail = #{mail}
+	</select>
+	
+	<!-- 임시비번 변경 -->
+	<update id="pwchange" parameterType="mVO">
+		UPDATE
+			member
+		SET
+			pw = #{pw}
+		WHERE
+			id = #{id}
+	</update>
+	<!-- 아이디 찾기 -->
+	<select id="idfind" resultType="String" parameterType="mVO">
+		SELECT
+			id
+		FROM
+			member
+		WHERE
+			name = #{name}
+			AND mail = #{mail}
+	</select>
+	<!--  -->
+	
+</mapper>

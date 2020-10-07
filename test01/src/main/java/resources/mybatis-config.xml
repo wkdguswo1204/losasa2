@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+			PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<settings>
+	 	<setting name="cacheEnabled" value="false"/>
+	 	<setting name="useGeneratedKeys" value="true" />
+	 	<setting name="defaultExecutorType" value="REUSE" />
+	 </settings>
+	 
+	  <typeAliases>
+	 	<typeAlias alias="mVO" type="com.class02.no4.vo.MemberVO" />
+	 	<typeAlias alias="jVO" type="com.class02.no4.vo.JoinMailVO" />
+	 	<typeAlias alias="bvo" type="com.class02.no4.vo.BoardVO" />
+	 	<!-- 
+	 	<typeAlias alias="fvo" type="com.class02.no4.vo.ProfileVO" />
+	 	<typeAlias alias="page" type="com.class02.no4.util.PageUtil" />
+	  	-->
+	 	</typeAliases>
+	 	
+	 	<mappers>
+		  	<mapper resource="com/class02/no4/sql/MemberSQL.xml" />
+			<mapper resource="com/class02/no4/sql/JoinMailSQL.xml" />
+		  	<mapper resource="com/class02/no4/sql/BoardSQL.xml" />
+
+	 	</mappers>
+</configuration>

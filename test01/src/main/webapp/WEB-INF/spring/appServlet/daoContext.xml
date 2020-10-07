@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						https://www.springframework.org/schema/context/spring-context.xsd">
+		
+		<!-- 회원관련 데이터베이스 처리 dao 빈처리 -->
+		<bean id="mDAO" class="com.class02.no4.dao.MemberDAO" />
+		<bean id="bDAO" class="com.class02.no4.dao.BoardDAO" />
+		
+		<!-- 조인메일 데이터베이스 dao 빈처리 -->
+		<bean id="jDAO" class="com.class02.no4.dao.JoinMailDAO" />
+					
+</beans>
